@@ -185,7 +185,7 @@ class Autoreply:
         reply=['感谢分享','感谢你的分享','谢谢分享','多谢分享','感谢作者的分享','谢谢坛友分享','内容精彩','的确如此','感谢分享','涨知识了','1024']
         reply_m=random.randint(0,10)
         reply_news=reply[reply_m]
-        print('本次回复消息是:'+reply_news)
+        auto.debug('本次回复消息是:'+reply_news) #print('本次回复消息是:'+reply_news)
         reply_news=reply_news.encode('gb18030')
         return  reply_news
 
@@ -266,34 +266,34 @@ class Autoreply:
         while n<10 and suc is False:
             try:
                 au=''
-                print('第'+str(ge+1)+'个账号当前在回复第'+str(n+1)+'个。')
+                auto.debug('第'+str(ge+1)+'个账号当前在回复第'+str(n+1)+'个。')
                 geturl,tid=Autoreply.getonelink(todaylist)
                 reply_news=Autoreply.getreply()
                 res=Autoreply.getmatch(geturl,cookies)
                 sleeptime=random.randint(1024,1589)
                 au=Autoreply.postreply(cookies,res,reply_news,tid)
                 if au=='回复成功':
-                    print('第'+str(ge+1)+'个账号回复成功')
+                    auto.debug('第'+str(ge+1)+'个账号回复成功')
                     n=n+1
-                    print('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
+                    auto.debug('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
                     Autoreply.browse(geturl,cookies)
                     sleep(sleeptime)
-                    print('第'+str(ge+1)+'个账号休眠完成')
+                    auto.debug('第'+str(ge+1)+'个账号休眠完成')
                 elif au=='今日已达上限':
-                    print('第'+str(ge+1)+'个账号回复失败，今日次数已达10次')
+                    auto.debug('第'+str(ge+1)+'个账号回复失败，今日次数已达10次')
                     suc=True
                 else:
-                    print('第'+str(ge+1)+'个账号1024限制或者被禁言！！！')
-                    print('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
+                    auto.debug('第'+str(ge+1)+'个账号1024限制或者被禁言！！！')
+                    auto.debug('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
                     sleep(sleeptime)
-                    print('第'+str(ge+1)+'个账号休眠完成')
+                    auto.debug('第'+str(ge+1)+'个账号休眠完成')
             except:
-                print('第'+str(ge+1)+'个账号回复失败，重试')
+                auto.debug('第'+str(ge+1)+'个账号回复失败，重试')
                 sleep(60)
         n=Autoreply.getnumber(cookies)
-        print('第'+str(ge+1)+'个账号开始时发表帖子:'+m)
-        print('第'+str(ge+1)+'个账号结束时发表帖子:'+n)
-        print('第'+str(ge+1)+'个账号回复'+str(int(n)-int(m))+'次')
+        auto.debug('第'+str(ge+1)+'个账号开始时发表帖子:'+m)
+        auto.debug('第'+str(ge+1)+'个账号结束时发表帖子:'+n)
+        auto.debug('第'+str(ge+1)+'个账号回复'+str(int(n)-int(m))+'次')
 
 if __name__ == "__main__":
     n=0
@@ -321,26 +321,26 @@ if __name__ == "__main__":
         while success is None:
             au=auto.login1()
             if au=='登录尝试次数过多,需输入验证码':
-                print('登录尝试次数过多,需输入验证码')
+                auto.debug('登录尝试次数过多,需输入验证码')
                 auto.getverwebp()
                 if config.get('Input_self',False):
                     vercode=input('请手动输入验证码:')
                 else:
                     getcd=Getver()
                     vercode=getcd.getcode()
-                print('输入的验证码为:'+vercode)
+                auto.debug('输入的验证码为:'+vercode)
                 while auto.inputvercode(vercode)=='验证码不正确，请重新输入':
-                    print('验证码不正确，请重新输入')
+                    auto.debug('验证码不正确，请重新输入')
                     auto.getverwebp()
                     if config.get('Input_self',False):
                         vercode=input('请手动输入验证码:')
                     else:
                         getcd=Getver()
                         vercode=getcd.getcode()
-                    print('输入的验证码为:'+vercode)
+                    auto.debug('输入的验证码为:'+vercode)
                 if auto.login1()=='賬號已開啟兩步驗證':
                     if auto.login2()=='已經順利登錄':
-                        print('登录成功')
+                        auto.debug('登录成功')
                         success = True
                         au=''
             else:
@@ -352,7 +352,7 @@ if __name__ == "__main__":
         cookies=auto.getcookies()
         cookieslist.append(cookies)
         count+=1
-    print('cookies获取完成')
+    auto.debug('cookies获取完成')
     todaylist=auto.gettodaylist()
     p=Pool(len(userlist))
     for i in range(len(userlist)):
@@ -360,5 +360,5 @@ if __name__ == "__main__":
         print('第',str(i+1),'个进程启动.。。')
     p.close()
     p.join()
-    print(res.get())          #查看错误信息
-    print('完成')
+    auto.debug(res.get())          #查看错误信息
+    auto.debug('完成')

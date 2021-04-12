@@ -273,27 +273,27 @@ class Autoreply:
                 sleeptime=random.randint(1024,1589)
                 au=Autoreply.postreply(cookies,res,reply_news,tid)
                 if au=='回复成功':
-                    auto.debug('第'+str(ge+1)+'个账号回复成功')
+                    print('第'+str(ge+1)+'个账号回复成功')
                     n=n+1
-                    auto.debug('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
+                    print('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
                     Autoreply.browse(geturl,cookies)
                     sleep(sleeptime)
-                    auto.debug('第'+str(ge+1)+'个账号休眠完成')
+                    print('第'+str(ge+1)+'个账号休眠完成')
                 elif au=='今日已达上限':
-                    auto.debug('第'+str(ge+1)+'个账号回复失败，今日次数已达10次')
+                    print('第'+str(ge+1)+'个账号回复失败，今日次数已达10次')
                     suc=True
                 else:
-                    auto.debug('第'+str(ge+1)+'个账号1024限制或者被禁言！！！')
-                    auto.debug('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
+                    print('第'+str(ge+1)+'个账号1024限制或者被禁言！！！')
+                    print('第'+str(ge+1)+'个账号休眠'+str(sleeptime)+'s...')
                     sleep(sleeptime)
-                    auto.debug('第'+str(ge+1)+'个账号休眠完成')
+                    print('第'+str(ge+1)+'个账号休眠完成')
             except:
                 auto.debug('第'+str(ge+1)+'个账号回复失败，重试')
                 sleep(60)
         n=Autoreply.getnumber(cookies)
-        auto.debug('第'+str(ge+1)+'个账号开始时发表帖子:'+m)
-        auto.debug('第'+str(ge+1)+'个账号结束时发表帖子:'+n)
-        auto.debug('第'+str(ge+1)+'个账号回复'+str(int(n)-int(m))+'次')
+        print('第'+str(ge+1)+'个账号开始时发表帖子:'+m)
+        print('第'+str(ge+1)+'个账号结束时发表帖子:'+n)
+        print('第'+str(ge+1)+'个账号回复'+str(int(n)-int(m))+'次')
 
 if __name__ == "__main__":
     n=0

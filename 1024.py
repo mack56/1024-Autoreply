@@ -360,5 +360,5 @@ if __name__ == "__main__":
         print('第',str(i+1),'个进程启动.。。')
     p.close()
     p.join()
-    auto.debug(res.get())          #查看错误信息
-    auto.debug('完成')
+    print(res.get())          #查看错误信息
+    print('完成')

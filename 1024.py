@@ -352,7 +352,7 @@ if __name__ == "__main__":
         cookies=auto.getcookies()
         cookieslist.append(cookies)
         count+=1
-    auto.debug('cookies获取完成')
+    print('cookies获取完成')
     todaylist=auto.gettodaylist()
     p=Pool(len(userlist))
     for i in range(len(userlist)):

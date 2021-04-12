@@ -185,7 +185,7 @@ class Autoreply:
         reply=['感谢分享','感谢你的分享','谢谢分享','多谢分享','感谢作者的分享','谢谢坛友分享','内容精彩','的确如此','感谢分享','涨知识了','1024']
         reply_m=random.randint(0,10)
         reply_news=reply[reply_m]
-        auto.debug('本次回复消息是:'+reply_news) #print('本次回复消息是:'+reply_news)
+        print('本次回复消息是:'+reply_news) #print('本次回复消息是:'+reply_news)
         reply_news=reply_news.encode('gb18030')
         return  reply_news
 
@@ -266,7 +266,7 @@ class Autoreply:
         while n<10 and suc is False:
             try:
                 au=''
-                auto.debug('第'+str(ge+1)+'个账号当前在回复第'+str(n+1)+'个。')
+                print('第'+str(ge+1)+'个账号当前在回复第'+str(n+1)+'个。')
                 geturl,tid=Autoreply.getonelink(todaylist)
                 reply_news=Autoreply.getreply()
                 res=Autoreply.getmatch(geturl,cookies)
@@ -288,7 +288,7 @@ class Autoreply:
                     sleep(sleeptime)
                     print('第'+str(ge+1)+'个账号休眠完成')
             except:
-                auto.debug('第'+str(ge+1)+'个账号回复失败，重试')
+                print('第'+str(ge+1)+'个账号回复失败，重试')
                 sleep(60)
         n=Autoreply.getnumber(cookies)
         print('第'+str(ge+1)+'个账号开始时发表帖子:'+m)

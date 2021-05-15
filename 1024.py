@@ -182,8 +182,8 @@ class Autoreply:
     @staticmethod
     def getreply():
         #自定义回复内容，记得修改随机数
-        reply=['感谢分享','感谢你的分享','谢谢分享','多谢分享','感谢作者的分享','谢谢坛友分享','感谢分享','涨知识了']
-        reply_m=random.randint(0,7)
+        reply=['感谢分享','感谢你的分享','谢谢分享','多谢分享','感谢作者的分享','谢谢坛友分享','感谢分享']
+        reply_m=random.randint(0,6)
         reply_news=reply[reply_m]
         print('本次回复消息是:'+reply_news) #print('本次回复消息是:'+reply_news)
         reply_news=reply_news.encode('gb18030')
@@ -272,7 +272,7 @@ class Autoreply:
                 geturl,tid=Autoreply.getonelink(todaylist)
                 reply_news=Autoreply.getreply()
                 res=Autoreply.getmatch(geturl,cookies)
-                sleeptime=random.randint(100,280)
+                sleeptime=random.randint(90,280)
                 au=Autoreply.postreply(cookies,res,reply_news,tid)
                 if au=='回复成功':
                     print('第'+str(ge+1)+'个账号回复成功')
